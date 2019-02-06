@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "net.fabricmc.example.mixin",
+  "package": "com.github.draylar.ding.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ExampleMixin"
+    "DingMixin"
   ],
   "injectors": {
     "defaultRequire": 1
