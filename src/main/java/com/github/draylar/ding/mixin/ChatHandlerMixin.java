@@ -25,9 +25,9 @@ public class ChatHandlerMixin
         // we  have to replace the <PlayerUsername> start to prevent it from reporting.
         if(playerMessage.contains(currentUsername))
         {
-            if(Ding.config.playPingSound)
+            if(Ding.config.pingConfig.playPingSound)
             {
-                Ding.attemptPlayPing(Ding.config.pingSound);
+                Ding.attemptPlayPing(Ding.config.pingConfig.pingSound);
             }
 
             Ding.highlightPhrase(textComponent, currentUsername);
@@ -35,12 +35,12 @@ public class ChatHandlerMixin
 
         // username is not in text, check for word list
         else
-            for (String triggerString : Ding.config.triggerStrings)
+            for (String triggerString : Ding.config.pingConfig.triggerStrings)
                 if (playerMessage.contains(triggerString))
                 {
-                    if(Ding.config.playPingSound)
+                    if(Ding.config.pingConfig.playPingSound)
                     {
-                        Ding.attemptPlayPing(Ding.config.pingSound);
+                        Ding.attemptPlayPing(Ding.config.pingConfig.pingSound);
                     }
 
                     Ding.highlightPhrase(textComponent, triggerString);

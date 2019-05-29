@@ -50,13 +50,13 @@ public class Ding implements ClientModInitializer
 		{
 			SoundManager soundManager = MinecraftClient.getInstance().getSoundManager();
 			soundManager.play(PositionedSoundInstance.master(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f));
-			System.out.println("[Ding] Sound event - " + config.pingSound + " - is invalid! Using default sound.");
+			System.out.println("[Ding] Sound event - " + soundID + " - is invalid! Using default sound.");
 		}
 	}
 
 	public static void highlightPhrase(TextComponent textComponent, String phrase)
 	{
-		if(config.highlightTriggers)
+		if(config.pingConfig.highlightTriggers)
 		{
 			// make it easier to access these parts later
 			String chatMessage = textComponent.getText();
@@ -72,7 +72,7 @@ public class Ding implements ClientModInitializer
 				List<TextComponent> list = Lists.newArrayList();
 
 				// format might be null, check before adding
-				TextFormat format = TextFormat.getFormatByName(config.textFormatName) == null ? TextFormat.YELLOW : TextFormat.getFormatByName(config.textFormatName);
+				TextFormat format = TextFormat.getFormatByName(config.pingConfig.textFormatName) == null ? TextFormat.YELLOW : TextFormat.getFormatByName(config.pingConfig.textFormatName);
 
 				// create message: player tag, beginning of message, colored phrase, end of message.
 				list.add(new StringTextComponent(playerTag));
