@@ -24,7 +24,6 @@ public class Ding implements ClientModInitializer
 {
 	public static MainConfig config;
 
-
 	@Override
 	public void onInitializeClient()
 	{
@@ -56,7 +55,7 @@ public class Ding implements ClientModInitializer
 
 	public static void highlightPhrase(TextComponent textComponent, String phrase)
 	{
-		if(config.pingConfig.highlightTriggers)
+		if(config.highlightTriggers)
 		{
 			// make it easier to access these parts later
 			String chatMessage = textComponent.getText();
@@ -72,7 +71,7 @@ public class Ding implements ClientModInitializer
 				List<TextComponent> list = Lists.newArrayList();
 
 				// format might be null, check before adding
-				TextFormat format = TextFormat.getFormatByName(config.pingConfig.textFormatName) == null ? TextFormat.YELLOW : TextFormat.getFormatByName(config.pingConfig.textFormatName);
+				TextFormat format = TextFormat.getFormatByName(config.textFormatName) == null ? TextFormat.YELLOW : TextFormat.getFormatByName(config.textFormatName);
 
 				// create message: player tag, beginning of message, colored phrase, end of message.
 				list.add(new StringTextComponent(playerTag));

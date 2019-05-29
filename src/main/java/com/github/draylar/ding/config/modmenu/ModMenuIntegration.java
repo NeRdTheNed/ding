@@ -1,5 +1,6 @@
-package com.github.draylar.ding.config;
+package com.github.draylar.ding.config.modmenu;
 
+import com.github.draylar.ding.config.MainConfig;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.client.gui.Screen;
@@ -12,7 +13,7 @@ public class ModMenuIntegration implements ModMenuApi
     @Override
     public String getModId()
     {
-        return "ding";
+        return "main";
     }
 
     @Override

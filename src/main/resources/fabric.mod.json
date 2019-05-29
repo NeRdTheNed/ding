@@ -17,7 +17,10 @@
     "client": [
       "com.github.draylar.ding.Ding"
     ],
-    "modmenu": [ "com.github.draylar.ding.config.ModMenuIntegration" ]
+    "modmenu":
+    [
+      "com.github.draylar.ding.config.modmenu.ModMenuIntegration"
+    ]
   },
   "mixins": [
     "ding.client.json"

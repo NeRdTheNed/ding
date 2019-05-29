@@ -21,7 +21,7 @@ public abstract class RenderMainMenuMixin
         if(firstTime)
         {
             MainConfig config = AutoConfig.getConfigHolder(MainConfig.class).getConfig();
-            Identifier identifier = new Identifier(config.dingConfig.soundEvent);
+            Identifier identifier = new Identifier(config.soundEvent);
             if(identifier.getNamespace() == "") identifier = new Identifier("minecraft", identifier.getPath());
 
             Ding.attemptPlayPing(identifier.toString());
