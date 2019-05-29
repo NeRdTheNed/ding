@@ -3,7 +3,8 @@
   "package": "com.github.draylar.ding.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "DingMixin"
+    "RenderMainMenuMixin",
+    "ChatHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

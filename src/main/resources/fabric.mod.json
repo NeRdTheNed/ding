@@ -1,16 +1,30 @@
 {
+  "schemaVersion": 1,
   "id": "ding",
+  "version": "1.1.0",
+
   "name": "Ding",
-  "description": "Adds a ding sound when the game is fully loaded-- for 1.14 Fabric!",
-  "version": "1.0.0",
-  "side": "client",
-  "initializers": [
-    "com.github.draylar.ding.Ding"
+  "description": "Adds a ding sound when the game is fully loaded!",
+  "authors": [
+    "Draylar"
   ],
-  "requires": {
-    "fabric": "*"
+
+  "license": "GPLv3",
+  "icon": "assets/ding/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.github.draylar.ding.Ding"
+    ],
+    "modmenu": [ "com.github.draylar.ding.ModMenuIntegration" ]
   },
-  "mixins": {
-    "client": "ding.client.json"
+  "mixins": [
+    "ding.client.json"
+  ],
+
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }
