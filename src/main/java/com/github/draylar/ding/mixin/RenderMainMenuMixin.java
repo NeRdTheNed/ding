@@ -1,7 +1,7 @@
 package com.github.draylar.ding.mixin;
 
 import com.github.draylar.ding.Ding;
-import com.github.draylar.ding.DingConfig;
+import com.github.draylar.ding.config.MainConfig;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import net.minecraft.client.gui.MainMenuScreen;
 import net.minecraft.util.Identifier;
@@ -20,7 +20,7 @@ public abstract class RenderMainMenuMixin
     {
         if(firstTime)
         {
-            DingConfig config = AutoConfig.getConfigHolder(DingConfig.class).getConfig();
+            MainConfig config = AutoConfig.getConfigHolder(MainConfig.class).getConfig();
             Identifier identifier = new Identifier(config.soundEvent);
             if(identifier.getNamespace() == "") identifier = new Identifier("minecraft", identifier.getPath());
 

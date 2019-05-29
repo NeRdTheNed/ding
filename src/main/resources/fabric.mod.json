@@ -4,7 +4,7 @@
   "version": "1.1.0",
 
   "name": "Ding",
-  "description": "Adds a ding sound when the game is fully loaded!",
+  "description": "Configurable noises for different events.",
   "authors": [
     "Draylar"
   ],
@@ -17,7 +17,7 @@
     "client": [
       "com.github.draylar.ding.Ding"
     ],
-    "modmenu": [ "com.github.draylar.ding.ModMenuIntegration" ]
+    "modmenu": [ "com.github.draylar.ding.config.ModMenuIntegration" ]
   },
   "mixins": [
     "ding.client.json"

@@ -1,5 +1,6 @@
 package com.github.draylar.ding;
 
+import com.github.draylar.ding.config.MainConfig;
 import com.google.common.collect.Lists;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1.serializer.GsonConfigSerializer;
@@ -21,13 +22,13 @@ import java.util.List;
 
 public class Ding implements ClientModInitializer
 {
-	public static DingConfig config;
+	public static MainConfig config;
 
 
 	@Override
 	public void onInitializeClient()
 	{
-		config = AutoConfig.register(DingConfig.class, GsonConfigSerializer::new).getConfig();
+		config = AutoConfig.register(MainConfig.class, GsonConfigSerializer::new).getConfig();
 	}
 
 
