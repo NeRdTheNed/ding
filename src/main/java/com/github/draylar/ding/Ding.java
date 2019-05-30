@@ -1,19 +1,20 @@
 package com.github.draylar.ding;
 
-import com.github.draylar.ding.config.MainConfig;
+import com.github.draylar.ding.config.DingConfig;
 import com.google.common.collect.Lists;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.ChatFormat;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.audio.PositionedSoundInstance;
-import net.minecraft.client.audio.SoundManager;
+import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundManager;
+import net.minecraft.network.chat.BaseComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.StringTextComponent;
-import net.minecraft.text.TextComponent;
-import net.minecraft.text.TextFormat;
-import net.minecraft.text.TranslatableTextComponent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -22,14 +23,13 @@ import java.util.List;
 
 public class Ding implements ClientModInitializer
 {
-	public static MainConfig config;
+	public static DingConfig config;
 
 	@Override
 	public void onInitializeClient()
 	{
-		config = AutoConfig.register(MainConfig.class, GsonConfigSerializer::new).getConfig();
+		config = AutoConfig.register(DingConfig.class, GsonConfigSerializer::new).getConfig();
 	}
-
 
 	/**
 	 * Attempts to play a sound to the player.
@@ -53,7 +53,7 @@ public class Ding implements ClientModInitializer
 		}
 	}
 
-	public static void highlightPhrase(TextComponent textComponent, String phrase)
+	public static void highlightPhrase(Component textComponent, String phrase)
 	{
 		if(config.highlightTriggers)
 		{
@@ -63,7 +63,7 @@ public class Ding implements ClientModInitializer
 			String playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
 
 			// cast to a use-able sub-class
-			TranslatableTextComponent translatableTextComponent = (TranslatableTextComponent) textComponent;
+			TranslatableComponent translatableTextComponent = (TranslatableComponent) textComponent;
 
 			try
 			{
@@ -71,13 +71,13 @@ public class Ding implements ClientModInitializer
 				List<TextComponent> list = Lists.newArrayList();
 
 				// format might be null, check before adding
-				TextFormat format = TextFormat.getFormatByName(config.textFormatName) == null ? TextFormat.YELLOW : TextFormat.getFormatByName(config.textFormatName);
+				ChatFormat format = ChatFormat.getFormatByName(config.textFormatName) == null ? ChatFormat.YELLOW : ChatFormat.getFormatByName(config.textFormatName);
 
 				// create message: player tag, beginning of message, colored phrase, end of message.
-				list.add(new StringTextComponent(playerTag));
-				list.add(new StringTextComponent(playerMessage.substring(0, playerMessage.indexOf(phrase))));
-				list.add(new StringTextComponent(phrase).applyFormat(format));
-				list.add(new StringTextComponent(playerMessage.substring(playerMessage.indexOf(phrase) + phrase.length())));
+				list.add(new TextComponent(playerTag));
+				list.add(new TextComponent(playerMessage.substring(0, playerMessage.indexOf(phrase))));
+				list.add((TextComponent) new TextComponent(phrase).applyFormat(format));
+				list.add(new TextComponent(playerMessage.substring(playerMessage.indexOf(phrase) + phrase.length())));
 
 				// change the text message to have our modified message
 				Field myField = translatableTextComponent.getClass().getDeclaredField("translatedText");

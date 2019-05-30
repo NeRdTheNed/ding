@@ -1,16 +1,16 @@
 package com.github.draylar.ding.mixin;
 
 import com.github.draylar.ding.Ding;
-import com.github.draylar.ding.config.MainConfig;
+import com.github.draylar.ding.config.DingConfig;
 import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
-import net.minecraft.client.gui.MainMenuScreen;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MainMenuScreen.class)
+@Mixin(TitleScreen.class)
 public abstract class RenderMainMenuMixin
 {
     private static boolean firstTime = true;
@@ -20,8 +20,8 @@ public abstract class RenderMainMenuMixin
     {
         if(firstTime)
         {
-            MainConfig config = AutoConfig.getConfigHolder(MainConfig.class).getConfig();
-            Identifier identifier = new Identifier(config.soundEvent);
+            DingConfig config = AutoConfig.getConfigHolder(DingConfig.class).getConfig();
+            Identifier identifier = new Identifier(config.loadSound);
             if(identifier.getNamespace() == "") identifier = new Identifier("minecraft", identifier.getPath());
 
             Ding.attemptPlayPing(identifier.toString());

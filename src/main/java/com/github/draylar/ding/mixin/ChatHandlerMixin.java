@@ -3,8 +3,9 @@ package com.github.draylar.ding.mixin;
 import com.github.draylar.ding.Ding;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatListenerHud;
-import net.minecraft.text.ChatMessageType;
-import net.minecraft.text.TextComponent;
+import net.minecraft.network.chat.ChatMessageType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ChatHandlerMixin
 {
     @Inject(at = @At("HEAD"), method = "onChatMessage")
-    private void onChat(ChatMessageType chatMessageType_1, TextComponent textComponent, CallbackInfo ci)
+    private void onChat(ChatMessageType chatMessageType_1, Component component_1, CallbackInfo ci)
     {
         String currentUsername = MinecraftClient.getInstance().player.getName().getText();
-        String chatMessage = textComponent.getText();
+        String chatMessage = component_1.getText();
         String playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
 
         // check for username, format for message is:
@@ -27,10 +28,10 @@ public class ChatHandlerMixin
         {
             if(Ding.config.playPingSound)
             {
-                Ding.attemptPlayPing(Ding.config.pingSound);
+                Ding.attemptPlayPing(Ding.config.alertSound);
             }
 
-            Ding.highlightPhrase(textComponent, currentUsername);
+            Ding.highlightPhrase(component_1, currentUsername);
         }
 
         // username is not in text, check for word list
@@ -40,10 +41,10 @@ public class ChatHandlerMixin
                 {
                     if(Ding.config.playPingSound)
                     {
-                        Ding.attemptPlayPing(Ding.config.pingSound);
+                        Ding.attemptPlayPing(Ding.config.alertSound);
                     }
 
-                    Ding.highlightPhrase(textComponent, triggerString);
+                    Ding.highlightPhrase(component_1, triggerString);
                     break;
                 }
     }

@@ -1,5 +1,9 @@
 {
-    "text.autoconfig.ding.option.soundEvent" : "Sound Played on Load",
+    "text.autoconfig.ding.option.loadSound" : "Sound Played on Load",
+    "text.autoconfig.ding.option.alertSound" : "Sound Played on Ping",
     "text.autoconfig.ding.category.default" : "Sound",
-    "text.autoconfig.ding.title" : "Ding Config"
+    "text.autoconfig.ding.title" : "Ding Config",
+    "text.autoconfig.ding.option.textFormatName": "Text Color",
+    "text.autoconfig.ding.option.highlightTriggers": "Highlight Triggers",
+    "text.autoconfig.ding.option.playPingSound": "Ping for Chat"
 }
