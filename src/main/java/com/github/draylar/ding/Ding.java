@@ -36,7 +36,9 @@ public class Ding implements ClientModInitializer
 	 */
 	public static void attemptPlayPing(String soundID)
 	{
-		SoundEvent event = Registry.SOUND_EVENT.get(new Identifier(soundID));
+		Identifier identifier = new Identifier(soundID);
+		if(identifier.getPath().isEmpty()) identifier = new Identifier("minecraft", identifier.getNamespace());
+		SoundEvent event = Registry.SOUND_EVENT.get(identifier);
 
 		if (event != null)
 		{
