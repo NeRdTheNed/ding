@@ -19,36 +19,46 @@ public class ChatHandlerMixin
         String currentUsername = MinecraftClient.getInstance().player.getName().getText();
         String chatMessage = component_1.getText();
         int index = chatMessage.indexOf(" ");
-        if(index != -1)
+
+        String playerMessage;
+
+        // simple check to remove player username
+        if (index != -1 && chatMessage.contains("<") && chatMessage.contains(">"))
         {
-            String playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
+            playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
+        }
 
-            // check for username, format for message is:
-            // <PlayerUsername> Hello, world!
-            // we  have to replace the <PlayerUsername> start to prevent it from reporting.
-            if (playerMessage.contains(currentUsername))
+        else
+        {
+            playerMessage = chatMessage;
+        }
+
+        // check for username, format for message is:
+        // <PlayerUsername> Hello, world!
+        // we  have to replace the <PlayerUsername> start to prevent it from reporting.
+        if (playerMessage.contains(currentUsername))
+        {
+            if (Ding.config.playPingSound)
             {
-                if (Ding.config.playPingSound)
-                {
-                    Ding.attemptPlayPing(Ding.config.alertSound);
-                }
-
-                Ding.highlightPhrase(component_1, currentUsername);
+                Ding.attemptPlayPing(Ding.config.alertSound);
             }
 
-            // username is not in text, check for word list
-            else
-                for (String triggerString : Ding.config.triggerStrings)
-                    if (playerMessage.contains(triggerString))
-                    {
-                        if (Ding.config.playPingSound)
-                        {
-                            Ding.attemptPlayPing(Ding.config.alertSound);
-                        }
-
-                        Ding.highlightPhrase(component_1, triggerString);
-                        break;
-                    }
+            Ding.highlightPhrase(component_1, currentUsername);
         }
+
+        // username is not in text, check for word list
+        else
+            for (String triggerString : Ding.config.triggerStrings)
+                if (playerMessage.contains(triggerString))
+                {
+                    if (Ding.config.playPingSound)
+                    {
+                        Ding.attemptPlayPing(Ding.config.alertSound);
+                    }
+
+                    Ding.highlightPhrase(component_1, triggerString);
+                    break;
+                }
+
     }
 }
