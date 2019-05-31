@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ding",
-  "version": "2.0.1",
+  "version": "2.0.2",
 
   "name": "Ding",
   "description": "Configurable noises for different events.",
