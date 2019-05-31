@@ -65,8 +65,7 @@ public class Ding implements ClientModInitializer
 			// cast to a use-able sub-class
 			TranslatableComponent translatableTextComponent = (TranslatableComponent) textComponent;
 
-			try
-			{
+
 				// create list and add our message with formatted phrase to it
 				List<TextComponent> list = Lists.newArrayList();
 
@@ -79,14 +78,29 @@ public class Ding implements ClientModInitializer
 				list.add((TextComponent) new TextComponent(phrase).applyFormat(format));
 				list.add(new TextComponent(playerMessage.substring(playerMessage.indexOf(phrase) + phrase.length())));
 
+				Field translatedText;
+
 				// change the text message to have our modified message
-				Field myField = translatableTextComponent.getClass().getDeclaredField("translatedText");
-				myField.setAccessible(true);
-				myField.set(translatableTextComponent, list);
-			} catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+				try
+				{
+					translatedText = translatableTextComponent.getClass().getDeclaredField("translatedText");
+					translatedText.setAccessible(true);
+					translatedText.set(translatableTextComponent, list);
+				}
+				catch (Exception e)
+				{
+					try
+					{
+						translatedText = translatableTextComponent.getClass().getDeclaredField("field_11877");
+						translatedText.setAccessible(true);
+						translatedText.set(translatableTextComponent, list);
+					}
+
+					catch (Exception f)
+					{
+						System.out.println("Couldn't find field_11877 or translatedText fields! Please report this.");
+					}
+				}
 		}
 	}
 }
