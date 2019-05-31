@@ -5,7 +5,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatListenerHud;
 import net.minecraft.network.chat.ChatMessageType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,33 +18,37 @@ public class ChatHandlerMixin
     {
         String currentUsername = MinecraftClient.getInstance().player.getName().getText();
         String chatMessage = component_1.getText();
-        String playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
-
-        // check for username, format for message is:
-        // <PlayerUsername> Hello, world!
-        // we  have to replace the <PlayerUsername> start to prevent it from reporting.
-        if(playerMessage.contains(currentUsername))
+        int index = chatMessage.indexOf(" ");
+        if(index != -1)
         {
-            if(Ding.config.playPingSound)
+            String playerMessage = chatMessage.substring(chatMessage.indexOf(" "));
+
+            // check for username, format for message is:
+            // <PlayerUsername> Hello, world!
+            // we  have to replace the <PlayerUsername> start to prevent it from reporting.
+            if (playerMessage.contains(currentUsername))
             {
-                Ding.attemptPlayPing(Ding.config.alertSound);
+                if (Ding.config.playPingSound)
+                {
+                    Ding.attemptPlayPing(Ding.config.alertSound);
+                }
+
+                Ding.highlightPhrase(component_1, currentUsername);
             }
 
-            Ding.highlightPhrase(component_1, currentUsername);
-        }
-
-        // username is not in text, check for word list
-        else
-            for (String triggerString : Ding.config.triggerStrings)
-                if (playerMessage.contains(triggerString))
-                {
-                    if(Ding.config.playPingSound)
+            // username is not in text, check for word list
+            else
+                for (String triggerString : Ding.config.triggerStrings)
+                    if (playerMessage.contains(triggerString))
                     {
-                        Ding.attemptPlayPing(Ding.config.alertSound);
-                    }
+                        if (Ding.config.playPingSound)
+                        {
+                            Ding.attemptPlayPing(Ding.config.alertSound);
+                        }
 
-                    Ding.highlightPhrase(component_1, triggerString);
-                    break;
-                }
+                        Ding.highlightPhrase(component_1, triggerString);
+                        break;
+                    }
+        }
     }
 }
