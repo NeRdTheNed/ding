@@ -1,3 +1,4 @@
 # Ding
 Plays a sound when you load into MC.
-https://github.com/Draylar/ding-fabric
+
+https://www.curseforge.com/minecraft/mc-mods/ding-fabric
