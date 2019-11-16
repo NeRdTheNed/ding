@@ -8,6 +8,11 @@
   "authors": [
     "Draylar"
   ],
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/ding-fabric",
+    "issues": "https://github.com/Draylar/ding-fabric/issues",
+    "sources": "https://github.com/Draylar/ding-fabric"
+  },
 
   "license": "GPLv3",
   "icon": "assets/ding/icon.png",
@@ -29,5 +34,9 @@
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
+  },
+
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }
