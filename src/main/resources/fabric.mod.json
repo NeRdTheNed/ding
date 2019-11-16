@@ -1,31 +1,23 @@
 {
   "schemaVersion": 1,
   "id": "ding",
-  "version": "2.0.2",
-
+  "version": "3.0.0",
   "name": "Ding",
-  "description": "Configurable noises for different events.",
+  "description": "Plays a simple configurable sound when the game finishes loading.",
   "authors": [
     "Draylar"
   ],
-
-  "license": "GPLv3",
+  "license": "MIT",
   "icon": "assets/ding/icon.png",
-
   "environment": "client",
   "entrypoints": {
     "client": [
       "com.github.draylar.ding.Ding"
-    ],
-    "modmenu":
-    [
-      "com.github.draylar.ding.config.ModMenuIntegration"
     ]
   },
   "mixins": [
     "ding.client.json"
   ],
-
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
