@@ -7,8 +7,15 @@
   "authors": [
     "Draylar"
   ],
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/ding-fabric",
+    "issues": "https://github.com/Draylar/ding-fabric/issues",
+    "sources": "https://github.com/Draylar/ding-fabric"
+  },
+
   "license": "MIT",
   "icon": "assets/ding/icon.png",
+
   "environment": "client",
   "entrypoints": {
     "client": [
@@ -18,8 +25,13 @@
   "mixins": [
     "ding.client.json"
   ],
-  "requires": {
+
+  "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
+  },
+
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }
