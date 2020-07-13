@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ding",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "name": "Ding",
   "description": "Plays a simple configurable sound when the game finishes loading.",
   "authors": [
